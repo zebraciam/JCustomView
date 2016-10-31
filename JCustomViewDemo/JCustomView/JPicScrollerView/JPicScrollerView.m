@@ -13,7 +13,7 @@
 #import "JPicScrollerView.h"
 #import "JPageControl.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "JKit.h"
+#import <JKit/JKit.h>
 
 @interface JPicScrollerView () <UIScrollViewDelegate>
 

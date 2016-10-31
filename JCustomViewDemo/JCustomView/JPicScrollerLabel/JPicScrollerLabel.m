@@ -14,7 +14,7 @@
 
 #import "JPicScrollerLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "JKit.h"
+#import <JKit/JKit.h>
 
 @interface JPicScrollerLabel () <UIScrollViewDelegate>
 

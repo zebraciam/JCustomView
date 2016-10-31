@@ -7,8 +7,6 @@
 //
 
 #import "JTopClassification.h"
-#import "JMacro.h"
-#import "UIColor+J.h"
 
 #define Tag 235468912
 

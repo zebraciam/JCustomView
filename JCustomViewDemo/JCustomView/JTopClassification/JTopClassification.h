@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "JKit.h"
+#import <JKit/JKit.h>
+
 typedef void(^JTopClassificationCallBackBlock)(NSInteger index);
 @interface JTopClassification : UIView
 

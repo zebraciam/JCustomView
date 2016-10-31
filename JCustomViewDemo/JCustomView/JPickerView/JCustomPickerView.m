@@ -7,9 +7,8 @@
 //
 
 #import "JCustomPickerView.h"
-#import "JMacro.h"
-#import "UIColor+J.h"
-#import "UIView+J.h"
+#import <JKit/JKit.h>
+
 @interface JCustomPickerView ()
 
 @property (strong, nonatomic) UIToolbar *toolBar;

@@ -7,7 +7,8 @@
 //
 
 #import "JPagerBaseViewController.h"
-#import "JKit.h"
+#import <JKit/JKit.h>
+
 @implementation JPagerBaseViewController{
     UIView *lineBottom;
     UIView *topTabBottomLine;

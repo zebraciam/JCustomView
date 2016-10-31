@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JKit/JKit.h>
 
 static NSString *const JTabBarHidden = @"JTabbarHidden";
 static NSString *const JTabBarSelectIndex = @"JTabBarSelectIndex";
