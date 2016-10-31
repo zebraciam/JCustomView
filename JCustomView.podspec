@@ -1,7 +1,8 @@
 
 Pod::Spec.new do |s|
+
 s.name         = "JCustomView"
-s.version      = "1.0.1.2"
+s.version      = "1.0.1.3"
 s.summary      = "Fast iOS Develope App View"
 s.description  = <<-DESC
 JCustomView 开发时用的View类
@@ -21,4 +22,5 @@ s.dependency "SDWebImage"
 s.dependency "JKit"
 
 s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
+
 end
