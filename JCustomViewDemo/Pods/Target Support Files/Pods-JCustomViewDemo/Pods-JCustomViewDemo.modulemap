@@ -1,0 +1,6 @@
+framework module Pods_JCustomViewDemo {
+  umbrella header "Pods-JCustomViewDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}
