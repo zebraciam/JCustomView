@@ -12,10 +12,15 @@
 static NSString *const JTabBarHidden = @"JTabbarHidden";
 static NSString *const JTabBarSelectIndex = @"JTabBarSelectIndex";
 
+typedef BOOL(^JTabBarSelectIndexBlock)(NSInteger selectIndex);
 
 @interface JTabBarController : UITabBarController
 
 @property (strong, nonatomic) UIView * tabBarView;
+
+@property (nonatomic, copy) JTabBarSelectIndexBlock block;
+
+- (void)setBlock:(JTabBarSelectIndexBlock)block;
 
 /**
  *  创建tabbar

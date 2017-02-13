@@ -163,13 +163,47 @@
     
 }
 
-- (void)selectTab:(UIButton *)selectBtn{
-    if(selectBtn.selected == NO)
-    {
+- (void)setBlock:(JTabBarSelectIndexBlock)block {
+    
+    _block = block;
+    
+}
+
+- (void)selectTab:(UIButton *)selectBtn {
+    
+    
+    if (_block) {
+        
+        BOOL isDelegate = _block(selectBtn.tag);
+        
+        if(selectBtn.selected == NO && isDelegate == YES)
+        {
+            NSInteger selectTag = selectBtn.tag;
+            selectBtn.selected = YES;
+            
+            UIViewController *selectVC = [self.viewControllers objectAtIndex:selectTag];
+            
+            self.selectedViewController = selectVC;
+            
+            for(int i = 0; i < count; i++)
+            {
+                UIButton *btn = (UIButton *)[btnArray objectAtIndex:i];
+                if (btn.tag != selectTag){
+                    btn.selected = NO;
+                }
+                else{
+                    btn.selected = YES;
+                }
+            }
+        }
+
+        
+    } else if(selectBtn.selected == NO) {
         NSInteger selectTag = selectBtn.tag;
         selectBtn.selected = YES;
         
         UIViewController *selectVC = [self.viewControllers objectAtIndex:selectTag];
+        
         self.selectedViewController = selectVC;
         
         for(int i = 0; i < count; i++)
