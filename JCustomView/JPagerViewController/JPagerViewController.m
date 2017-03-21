@@ -12,7 +12,11 @@
 
 
 #define MaxNums  10
-@interface JPagerViewController ()<NSCacheDelegate>
+@interface JPagerViewController ()<NSCacheDelegate> {
+    
+    CGFloat _topBarHeight;
+    
+}
 
 @property (nonatomic, strong)NSCache *limitControllerCache; /**< 内存管理，避免创建过多的控制器所导致内存过于庞大   **/
 @property (strong, nonatomic) UIColor *selectColor; /**<  选中时的颜色   **/
@@ -120,7 +124,9 @@
     viewNumArray = [NSMutableArray array];
     vcsArray = [NSMutableArray array];
     vcsTagArray = [NSMutableArray array];
-    
+    if (!_topBarHeight) {
+        _topBarHeight = PageBtn;
+    }
     if (_myArray.count > self.defaultIndex && _classArray.count > self.defaultIndex) {
         pagerView = [[JPagerBaseViewController alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) WithSelectColor:_selectColor WithUnselectorColor:_unselectColor WithUnderLineColor:_underlineColor WithtopTabColor:_topTabColor];
         pagerView.titleArray = _myArray;
@@ -132,7 +138,8 @@
             Class class = NSClassFromString(className);
             if (class) {
                 UIViewController *ctrl = class.new;
-                ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * self.defaultIndex, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - PageBtn);
+                
+                ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * self.defaultIndex, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
                 [pagerView.scrollView addSubview:ctrl.view];
                 viewAlloc[self.defaultIndex] = YES;
                 [vcsArray addObject:ctrl];
@@ -164,6 +171,9 @@
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"currentPage"]) {
+        if (!_topBarHeight) {
+            _topBarHeight = PageBtn;
+        }
         NSInteger page = [change[@"new"] integerValue];
         NSLog(@"现在是控制器%li",(long)page);
         self.PageIndex = @(page).stringValue;
@@ -225,7 +235,7 @@
                         NSLog(@"控制器%li被清除了",(long)deallocTag + 1);
                         [vcsTagArray removeObjectAtIndex:0];
                     }
-                    ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * i, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - PageBtn);
+                    ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * i, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
                     [pagerView.scrollView addSubview:ctrl.view];
                     viewAlloc[i] = YES;
                     //                    UIView *view = class.new;
@@ -271,9 +281,17 @@
     
 }
 
-- (void)j_1setPagerViewTopBarWithWidth:(CGFloat)width {
+- (void)j_1setPagerViewTopBarWithWidth:(CGFloat)width andHeight:(CGFloat)height andAlpha:(CGFloat)alpha {
     
-    [pagerView setPagerViewTopBarWithWidth:width];
+    _topBarHeight = height;
+    
+    [pagerView setPagerViewTopBarWithWidth:width andHeight:height andAlpha:alpha];
+    
+    for (UIViewController *vc in vcsArray) {
+        
+        vc.view.frame = CGRectMake(FUll_VIEW_WIDTH * self.defaultIndex, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
+        
+    }
     
 }
 
