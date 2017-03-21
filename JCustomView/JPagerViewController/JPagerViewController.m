@@ -265,6 +265,18 @@
     }
 }
 
+- (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y {
+    
+    [pagerView setPagerViewLineViewWithWidth:width andY:y];
+    
+}
+
+- (void)j_1setPagerViewTopBarWithWidth:(CGFloat)width {
+    
+    [pagerView setPagerViewTopBarWithWidth:width];
+    
+}
+
 - (void)dealloc {
     [pagerView removeObserver:self forKeyPath:@"currentPage"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

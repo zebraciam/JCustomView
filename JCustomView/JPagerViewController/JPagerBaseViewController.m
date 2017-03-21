@@ -19,6 +19,12 @@
     UIColor *unselectBtn;
     UIColor *underline;
     UIColor *topTabColors;
+    
+    CGFloat _width;
+    
+    CGFloat _y;
+    
+    CGFloat _allWidth;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame WithSelectColor:(UIColor *)selectColor WithUnselectorColor:(UIColor *)unselectColor WithUnderLineColor:(UIColor *)underlineColor WithtopTabColor:(UIColor *)topTabColor
@@ -53,7 +59,12 @@
 - (void)setTitleArray:(NSArray *)titleArray {
     titlesArray = titleArray;
     arrayCount = titleArray.count;
-    self.topTab.frame = CGRectMake(0, 0, FUll_VIEW_WIDTH, PageBtn);
+    
+    if (!_allWidth) {
+        _allWidth = FUll_VIEW_WIDTH;
+    }
+    
+    self.topTab.frame = CGRectMake(0, 0, _allWidth, PageBtn);
     self.scrollView.frame = CGRectMake(0, PageBtn, FUll_VIEW_WIDTH, self.frame.size.height - PageBtn);
     [self addSubview:self.topTab];
     [self addSubview:self.scrollView];
@@ -70,6 +81,7 @@
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.alwaysBounceHorizontal = YES;
+//        _scrollView.bounces = NO;
     }
     return _scrollView;
 }
@@ -87,11 +99,12 @@
         _topTab.scrollEnabled = YES;
         _topTab.alwaysBounceHorizontal = YES;
         _topTab.showsHorizontalScrollIndicator = NO;
+//        _topTab.bounces = NO;
         CGFloat additionCount = 0;
         if (arrayCount > 5) {
             additionCount = (arrayCount - 5.0) / 5.0;
         }
-        _topTab.contentSize = CGSizeMake((1 + additionCount) * FUll_VIEW_WIDTH, -10);
+        _topTab.contentSize = CGSizeMake((1 + additionCount) * _allWidth, -10);
         btnArray = [NSMutableArray array];
         for (NSInteger i = 0; i < titlesArray.count; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -103,9 +116,9 @@
                 NSLog(@"您所提供的标题%li格式不正确。 Your title%li not fit for topTab,please correct it to NSString!",(long)i + 1,(long)i + 1);
             }
             if (titlesArray.count > 5) {
-                button.frame = CGRectMake(FUll_VIEW_WIDTH / 5 * i, 0, FUll_VIEW_WIDTH / 5, PageBtn);
+                button.frame = CGRectMake(_allWidth / 5 * i, 0, _allWidth / 5, PageBtn);
             }else {
-                button.frame = CGRectMake(FUll_VIEW_WIDTH / titlesArray.count * i, 0, FUll_VIEW_WIDTH / titlesArray.count, PageBtn);
+                button.frame = CGRectMake(_allWidth / titlesArray.count * i, 0, _allWidth / titlesArray.count, PageBtn);
             }
             [_topTab addSubview:button];
             [button addTarget:self action:@selector(touchAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -156,20 +169,45 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView.tag == 318) {
         self.currentPage = (NSInteger)((scrollView.contentOffset.x + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH);
+
     }
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    
+    
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.tag == 318) {
         NSInteger yourPage = (NSInteger)((scrollView.contentOffset.x + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH);
+        
         CGFloat additionCount = 0;
         CGFloat yourCount = 1.0 / arrayCount;
+        
+        UIButton *button = btnArray[yourPage];
+        
+        NSLog(@"%lf",scrollView.contentOffset.x / arrayCount - ((FUll_VIEW_WIDTH - _allWidth) / arrayCount * ((scrollView.contentOffset.x + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH)) + (yourCount * _allWidth - _width)/2.0);
         if (arrayCount > 5) {
             additionCount = (arrayCount - 5.0) / 5.0;
             yourCount = 1.0 / 5.0;
-            lineBottom.frame = CGRectMake(scrollView.contentOffset.x / 5, PageBtn - 2, yourCount * FUll_VIEW_WIDTH, 1);
+            if (!_width || !_y) {
+                _width = yourCount * _allWidth;
+                _y = PageBtn - 2;
+            }
+            lineBottom.frame = CGRectMake(scrollView.contentOffset.x / 5 - ((FUll_VIEW_WIDTH - _allWidth) / 5) * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _allWidth - _width) / 2, _y, _width, 1);
         }else {
-            lineBottom.frame = CGRectMake(scrollView.contentOffset.x / arrayCount, PageBtn - 2, yourCount * FUll_VIEW_WIDTH, 1);
+            if (!_width || !_y) {
+                _width = yourCount * _allWidth;
+                _y = PageBtn - 2;
+            }
+//            scrollView.contentOffset.x / arrayCount : 最初起始点
+//            (FUll_VIEW_WIDTH - _allWidth) / arrayCount: topBar宽度剩余的偏移量
+//             * scrollView.contentOffset.x / FUll_VIEW_WIDTH ：页码
+//            (yourCount * _allWidth - _width)/2 ：下划线偏移的Point
+//            起始点 - 设置topBar宽度时偏移量 * 页码
+            lineBottom.frame = CGRectMake(scrollView.contentOffset.x / arrayCount - (FUll_VIEW_WIDTH - _allWidth) / arrayCount * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _allWidth - _width)/2, _y, _width, 1);
         }
         for (NSInteger i = 0;  i < btnArray.count; i++) {
             if (unselectBtn) {
@@ -206,8 +244,44 @@
         additionCount = (arrayCount - 5.0) / 5.0;
         yourCount = 1.0 / 5.0;
     }
-    lineBottom.frame = CGRectMake(0, PageBtn - 2,yourCount * FUll_VIEW_WIDTH, 2);
-    topTabBottomLine.frame = CGRectMake(0, PageBtn - 1, (1 + additionCount) * FUll_VIEW_WIDTH, 1);
+    
+    if (!_width || !_y) {
+        _y = PageBtn - 2;
+        _width = yourCount * _allWidth;
+    }
+    
+    lineBottom.frame = CGRectMake((yourCount * _allWidth - _width), _y,_width, 1);
+    topTabBottomLine.frame = CGRectMake(-1000, PageBtn - 1, (1 + additionCount) * FUll_VIEW_WIDTH + 2000, 1);
+}
+
+
+- (void)setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y {
+    
+    _width = width;
+    _y = y;
+    
+    CGFloat yourCount = 1.0 / arrayCount;
+    CGFloat additionCount = 0;
+    if (arrayCount > 5) {
+        additionCount = (arrayCount - 5.0) / 5.0;
+        yourCount = 1.0 / 5.0;
+    }
+    lineBottom.frame = CGRectMake((yourCount * _allWidth - width) / 2, y, width, 1);
+    
+}
+
+- (void)setPagerViewTopBarWithWidth:(CGFloat)width {
+    
+    _allWidth = width;
+
+    [self.topTab removeFromSuperview];
+    
+    self.topTab = nil;
+    
+    self.topTab.frame = CGRectMake(0, 0, _allWidth, PageBtn);
+    
+    [self addSubview:self.topTab];
+
 }
 
 

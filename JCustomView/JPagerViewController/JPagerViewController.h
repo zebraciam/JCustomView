@@ -64,4 +64,22 @@ typedef void(^JPagerViewControllerBlock)(NSInteger index);
 
 - (void)j_setPagerViewControllerWithIndex:(NSInteger)index;
 
+
+//如果同时设置两个方法必须按顺序调用  j_1XXXX  >>  j_2XXXX
+/**
+ 设置topBar allWidth
+ 
+ @param width allWidth 默认屏幕的宽
+ */
+- (void)j_1setPagerViewTopBarWithWidth:(CGFloat)width;
+/**
+ 设置下划线的宽和y值
+
+ @param width 下划线宽 默认item.width
+ @param y y值 默认 item.height - 1
+ */
+- (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y;
+
+
+
 @end
