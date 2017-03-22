@@ -7,7 +7,6 @@
 //
 
 #import "JPagerViewController.h"
-#import "JPagerBaseViewController.h"
 #import "JPagerMacro.h"
 
 
@@ -38,7 +37,6 @@
 
 @implementation JPagerViewController
 {
-    JPagerBaseViewController *pagerView;
     NSMutableArray *viewNumArray;
     NSMutableArray *vcsTagArray;
     NSMutableArray *vcsArray;
@@ -128,10 +126,10 @@
         _topBarHeight = PageBtn;
     }
     if (_myArray.count > self.defaultIndex && _classArray.count > self.defaultIndex) {
-        pagerView = [[JPagerBaseViewController alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) WithSelectColor:_selectColor WithUnselectorColor:_unselectColor WithUnderLineColor:_underlineColor WithtopTabColor:_topTabColor];
-        pagerView.titleArray = _myArray;
-        [pagerView addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
-        [self addSubview:pagerView];
+        _pagerView = [[JPagerBaseViewController alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) WithSelectColor:_selectColor WithUnselectorColor:_unselectColor WithUnderLineColor:_underlineColor WithtopTabColor:_topTabColor];
+        _pagerView.titleArray = _myArray;
+        [_pagerView addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+        [self addSubview:_pagerView];
         //First ViewController present to the screen
         if (_classArray.count > self.defaultIndex && _myArray.count > self.defaultIndex) {
             NSString *className = _classArray[self.defaultIndex];
@@ -140,20 +138,20 @@
                 UIViewController *ctrl = class.new;
                 
                 ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * self.defaultIndex, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
-                [pagerView.scrollView addSubview:ctrl.view];
+                [_pagerView.scrollView addSubview:ctrl.view];
                 viewAlloc[self.defaultIndex] = YES;
                 [vcsArray addObject:ctrl];
                 [vcsTagArray addObject:[NSString stringWithFormat:@"%ld",(long)self.defaultIndex]];
                 NSLog(@"现在是控制器%ld",(long)self.defaultIndex);
                 self.PageIndex = [NSString stringWithFormat:@"%ld",(long)self.defaultIndex];
                 _block(self.defaultIndex);
-                /**< 利用NSCache对内存进行管理测试 **/
-                //                [self.limitControllerCache setObject:ctrl forKey:@(0)];
-                //                NSLog(@"%@", [self.limitControllerCache objectForKey:@(0)]);
-                //                UIView *view = class.new;
-                //                view.frame = CGRectMake(FUll_VIEW_WIDTH * 0, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - PageBtn);
-                //                [pagerView.scrollView addSubview:view];
-                //                viewAlloc[0] = YES;
+//                /**< 利用NSCache对内存进行管理测试 **/
+//                [self.limitControllerCache setObject:ctrl forKey:@(0)];
+//                NSLog(@"%@", [self.limitControllerCache objectForKey:@(0)]);
+//                UIView *view = class.new;
+//                view.frame = CGRectMake(FUll_VIEW_WIDTH * 0, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - PageBtn);
+//                [_pagerView.scrollView addSubview:view];
+//                viewAlloc[0] = YES;
             }
         }
     }else {
@@ -162,8 +160,8 @@
 }
 
 - (void)j_setPagerViewControllerWithIndex:(NSInteger)index{
-    [pagerView.scrollView setContentOffset:CGPointMake(FUll_VIEW_WIDTH * index, 0) animated:YES];
-    pagerView.currentPage = (FUll_VIEW_WIDTH * index + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH;
+    [_pagerView.scrollView setContentOffset:CGPointMake(FUll_VIEW_WIDTH * index, 0) animated:YES];
+    _pagerView.currentPage = (FUll_VIEW_WIDTH * index + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH;
 }
 
 
@@ -199,7 +197,7 @@
                     topTabOffsetX = page * More5LineWidth;
                 }
             }
-            [pagerView.topTab setContentOffset:CGPointMake(topTabOffsetX, 0) animated:YES];
+            [_pagerView.topTab setContentOffset:CGPointMake(topTabOffsetX, 0) animated:YES];
         }
         for (NSInteger i = 0; i < _myArray.count; i++) {
             if (page == i && i <= _classArray.count - 1) {
@@ -236,7 +234,7 @@
                         [vcsTagArray removeObjectAtIndex:0];
                     }
                     ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * i, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
-                    [pagerView.scrollView addSubview:ctrl.view];
+                    [_pagerView.scrollView addSubview:ctrl.view];
                     viewAlloc[i] = YES;
                     //                    UIView *view = class.new;
                     //                    view.frame = CGRectMake(FUll_VIEW_WIDTH * i, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - PageBtn);
@@ -277,7 +275,7 @@
 
 - (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y {
     
-    [pagerView setPagerViewLineViewWithWidth:width andY:y];
+    [_pagerView setPagerViewLineViewWithWidth:width andY:y];
     
 }
 
@@ -285,7 +283,7 @@
     
     _topBarHeight = height;
     
-    [pagerView setPagerViewTopBarWithWidth:width andHeight:height andAlpha:alpha];
+    [_pagerView setPagerViewTopBarWithWidth:width andHeight:height andAlpha:alpha];
     
     for (UIViewController *vc in vcsArray) {
         
@@ -296,7 +294,7 @@
 }
 
 - (void)dealloc {
-    [pagerView removeObserver:self forKeyPath:@"currentPage"];
+    [_pagerView removeObserver:self forKeyPath:@"currentPage"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

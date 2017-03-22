@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JPagerBaseViewController.h"
+
 typedef void(^JPagerViewControllerBlock)(NSInteger index);
 @interface JPagerViewController : UIView
 
-@property (nonatomic, strong) JPagerViewControllerBlock block;
+@property (nonatomic, copy) JPagerViewControllerBlock block;
 
 @property (nonatomic, assign) BOOL isUnnecessary;/**< 只保留最近的5个控制器，释放其他控制器的空间，如果滑到对应位置在对其重新创建加载 **/
+
+@property (nonatomic, strong) JPagerBaseViewController *pagerView;
+
 
 /**
  *  创建总控制器 类方法

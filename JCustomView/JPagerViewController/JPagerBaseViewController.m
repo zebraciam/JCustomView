@@ -10,8 +10,7 @@
 #import <JKit/JKit.h>
 
 @implementation JPagerBaseViewController{
-    UIView *lineBottom;
-    UIView *topTabBottomLine;
+
     NSMutableArray *btnArray;
     NSArray *titlesArray; /**<  标题   **/
     NSInteger arrayCount; /**<  topTab数量   **/
@@ -84,7 +83,7 @@
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.delegate = self;
         _scrollView.tag = 318;
-        _scrollView.backgroundColor = UIColorFromRGB(0xfafafa);
+        _scrollView.backgroundColor = JColorWithClear;
         _scrollView.contentSize = CGSizeMake(FUll_VIEW_WIDTH * titlesArray.count, -1);
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
@@ -149,17 +148,17 @@
             }
         }
         //创建tabTop下方总览线
-        topTabBottomLine = [UIView new];
-        topTabBottomLine.backgroundColor = UIColorFromRGB(0xcecece);
-        [_topTab addSubview:topTabBottomLine];
+        _topTabBottomLine = [UIView new];
+        _topTabBottomLine.backgroundColor = UIColorFromRGB(0xcecece);
+        [_topTab addSubview:_topTabBottomLine];
         //创建选中移动线
-        lineBottom = [UIView new];
+        _lineBottom = [UIView new];
         if (underline) {
-            lineBottom.backgroundColor = underline;
+            _lineBottom.backgroundColor = underline;
         }else {
-            lineBottom.backgroundColor = UIColorFromRGB(0xff6262);
+            _lineBottom.backgroundColor = UIColorFromRGB(0xff6262);
         }
-        [_topTab addSubview:lineBottom];
+        [_topTab addSubview:_lineBottom];
         [self initUI];
 
     }
@@ -181,10 +180,21 @@
     }
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
-    
-    
+    if (scrollView.tag == 318) {
+        self.currentPage = (NSInteger)((scrollView.contentOffset.x + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH);
+        
+        if (self.currentPage) {
+            self.currentPage = self.currentPage - 1;
+            self.currentPage = self.currentPage + 1;
+        }else {
+            
+            self.currentPage = self.currentPage + 1;
+            
+        }
+        
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -204,7 +214,7 @@
                 _width = yourCount * _topBarWidth;
                 _y = _topBarHeight - 2;
             }
-            lineBottom.frame = CGRectMake(scrollView.contentOffset.x / 5 - ((FUll_VIEW_WIDTH - _topBarWidth) / 5) * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width) / 2, _y, _width, 1);
+            _lineBottom.frame = CGRectMake(scrollView.contentOffset.x / 5 - ((FUll_VIEW_WIDTH - _topBarWidth) / 5) * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width) / 2, _y, _width, 1);
         }else {
             if (!_width || !_y) {
                 _width = yourCount * _topBarWidth;
@@ -215,7 +225,7 @@
 //             * scrollView.contentOffset.x / FUll_VIEW_WIDTH ：页码
 //            (yourCount * _topBarWidth - _width)/2 ：下划线偏移的Point
 //            起始点 - 设置topBar宽度时偏移量 * 页码
-            lineBottom.frame = CGRectMake(scrollView.contentOffset.x / arrayCount - (FUll_VIEW_WIDTH - _topBarWidth) / arrayCount * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width)/2, _y, _width, 1);
+            _lineBottom.frame = CGRectMake(scrollView.contentOffset.x / arrayCount - (FUll_VIEW_WIDTH - _topBarWidth) / arrayCount * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width)/2, _y, _width, 1);
         }
         for (NSInteger i = 0;  i < btnArray.count; i++) {
             if (unselectBtn) {
@@ -262,8 +272,8 @@
         _width = yourCount * _topBarWidth;
     }
     
-    lineBottom.frame = CGRectMake((yourCount * _topBarWidth - _width), _y,_width, 1);
-    topTabBottomLine.frame = CGRectMake(-1000, _topBarHeight - 1, (1 + additionCount) * FUll_VIEW_WIDTH + 2000, 1);
+    _lineBottom.frame = CGRectMake((yourCount * _topBarWidth - _width), _y,_width, 1);
+    _topTabBottomLine.frame = CGRectMake(-1000, _topBarHeight - 1, (1 + additionCount) * FUll_VIEW_WIDTH + 2000, 1);
 }
 
 
@@ -278,7 +288,7 @@
         additionCount = (arrayCount - 5.0) / 5.0;
         yourCount = 1.0 / 5.0;
     }
-    lineBottom.frame = CGRectMake((yourCount * _topBarWidth - width) / 2, y, width, 1);
+    _lineBottom.frame = CGRectMake((yourCount * _topBarWidth - width) / 2, y, width, 1);
     
 }
 

@@ -17,7 +17,8 @@
 @property (assign, nonatomic) NSInteger currentPage; /**<  页码   **/
 @property (strong, nonatomic) UIScrollView *topTab; /**<  顶部tab   **/
 @property (strong, nonatomic) NSArray *titleArray; /**<  标题   **/
-
+@property (strong, nonatomic) UIView *lineBottom;//下划线
+@property (strong, nonatomic) UIView *topTabBottomLine;//分割线
 
 /**
  设置下划线的宽和y值
