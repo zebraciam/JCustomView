@@ -8,6 +8,7 @@
 
 #import "JPagerViewController.h"
 #import "JPagerMacro.h"
+#import <JKit/JKit.h>
 
 
 #define MaxNums  10
@@ -142,7 +143,7 @@
                 viewAlloc[self.defaultIndex] = YES;
                 [vcsArray addObject:ctrl];
                 [vcsTagArray addObject:[NSString stringWithFormat:@"%ld",(long)self.defaultIndex]];
-                NSLog(@"现在是控制器%ld",(long)self.defaultIndex);
+                JLog(@"现在是控制器%ld",(long)self.defaultIndex);
                 self.PageIndex = [NSString stringWithFormat:@"%ld",(long)self.defaultIndex];
                 _block(self.defaultIndex);
 //                /**< 利用NSCache对内存进行管理测试 **/
@@ -155,7 +156,7 @@
             }
         }
     }else {
-        NSLog(@"You should correct titlesArray or childVCs count!");
+        JLog(@"You should correct titlesArray or childVCs count!");
     }
 }
 
@@ -173,7 +174,7 @@
             _topBarHeight = PageBtn;
         }
         NSInteger page = [change[@"new"] integerValue];
-        NSLog(@"现在是控制器%li",(long)page);
+        JLog(@"现在是控制器%li",(long)page);
         self.PageIndex = @(page).stringValue;
         _block(page);
         if (_myArray.count > 5) {
@@ -220,7 +221,7 @@
                         [vcsArray removeObjectAtIndex:0];
                         NSInteger deallocTag = [[vcsTagArray firstObject] integerValue];
                         viewAlloc[deallocTag] = NO;
-                        NSLog(@"控制器%li被清除了",(long)deallocTag + 1);
+                        JLog(@"控制器%li被清除了",(long)deallocTag + 1);
                         [vcsTagArray removeObjectAtIndex:0];
                     }else if (vcsArray.count > 1 && !_isUnnecessary){
                         UIViewController *deallocVC = [vcsArray firstObject];
@@ -230,7 +231,7 @@
                         [vcsArray removeObjectAtIndex:0];
                         NSInteger deallocTag = [[vcsTagArray firstObject] integerValue];
                         viewAlloc[deallocTag] = NO;
-                        NSLog(@"控制器%li被清除了",(long)deallocTag + 1);
+                        JLog(@"控制器%li被清除了",(long)deallocTag + 1);
                         [vcsTagArray removeObjectAtIndex:0];
                     }
                     ctrl.view.frame = CGRectMake(FUll_VIEW_WIDTH * i, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
@@ -241,10 +242,10 @@
                     //                    [pagerView.scrollView addSubview:view];
                     //                    viewAlloc[i] = YES;
                 }else if (!class) {
-                    NSLog(@"您所提供的vc%li类并没有找到。  Your Vc%li is not found in this project!",(long)i + 1,(long)i + 1);
+                    JLog(@"您所提供的vc%li类并没有找到。  Your Vc%li is not found in this project!",(long)i + 1,(long)i + 1);
                 }
             }else if (page == i && i > _classArray.count - 1) {
-                NSLog(@"您没有配置对应Title%li的VC",(long)i + 1);
+                JLog(@"您没有配置对应Title%li的VC",(long)i + 1);
             }else {
                 /**<  内存管理限制控制器最大数量为5个   **/
                 if (vcsArray.count > 5 && _isUnnecessary) {
@@ -264,7 +265,7 @@
                     [vcsArray removeObjectAtIndex:0];
                     NSInteger deallocTag = [[vcsTagArray firstObject] integerValue];
                     viewAlloc[deallocTag] = NO;
-                    NSLog(@"控制器%li被清除了",(long)deallocTag + 1);
+                    JLog(@"控制器%li被清除了",(long)deallocTag + 1);
                     [vcsTagArray removeObjectAtIndex:0];
                 }
                 
@@ -301,7 +302,7 @@
 /**
  *  NSCache的代理方法，打印当前清除对象 */
 - (void)cache:(NSCache *)cache willEvictObject:(id)obj {
-    NSLog(@"清除了-------> %@", obj);
+    JLog(@"清除了-------> %@", obj);
 }
 
 

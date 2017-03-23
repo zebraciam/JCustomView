@@ -37,22 +37,22 @@
         if ([selectColor isKindOfClass:[UIColor class]]) {
             selectBtn = selectColor;
         }else {
-            NSLog(@"please change the selectColor into UIColor!");
+            JLog(@"please change the selectColor into UIColor!");
         }
         if ([unselectColor isKindOfClass:[UIColor class]]) {
             unselectBtn = unselectColor;
         }else {
-            NSLog(@"please change the unselectColor into UIColor!");
+            JLog(@"please change the unselectColor into UIColor!");
         }
         if ([underlineColor isKindOfClass:[UIColor class]]) {
             underline = underlineColor;
         }else {
-            NSLog(@"please change the underlineColor into UIColor!");
+            JLog(@"please change the underlineColor into UIColor!");
         }
         if ([topTabColor isKindOfClass:[UIColor class]]) {
             topTabColors = topTabColor;
         }else {
-            NSLog(@"please change the topTabColor into UIColor!");
+            JLog(@"please change the topTabColor into UIColor!");
         }
     }
     return self;
@@ -80,7 +80,7 @@
 #pragma mark - GetMethod
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
+        _scrollView = [[JScrollView alloc] init];
         _scrollView.delegate = self;
         _scrollView.tag = 318;
         _scrollView.backgroundColor = JColorWithClear;
@@ -95,7 +95,7 @@
 
 - (UIScrollView *)topTab {
     if (!_topTab) {
-        _topTab = [[UIScrollView alloc] init];
+        _topTab = [[JScrollView alloc] init];
         _topTab.delegate = self;
         if (topTabColors) {
             _topTab.backgroundColor = topTabColors;
@@ -120,7 +120,7 @@
             if ([titlesArray[i] isKindOfClass:[NSString class]]) {
                 [button setTitle:titlesArray[i] forState:UIControlStateNormal];
             }else {
-                NSLog(@"您所提供的标题%li格式不正确。 Your title%li not fit for topTab,please correct it to NSString!",(long)i + 1,(long)i + 1);
+                JLog(@"您所提供的标题%li格式不正确。 Your title%li not fit for topTab,please correct it to NSString!",(long)i + 1,(long)i + 1);
             }
             if (titlesArray.count > 5) {
                 button.frame = CGRectMake(_topBarWidth / 5 * i, 0, _topBarWidth / 5, _topBarHeight);
@@ -199,14 +199,12 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.tag == 318) {
+        
         NSInteger yourPage = (NSInteger)((scrollView.contentOffset.x + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH);
         
         CGFloat additionCount = 0;
         CGFloat yourCount = 1.0 / arrayCount;
         
-        UIButton *button = btnArray[yourPage];
-        
-        NSLog(@"%lf",scrollView.contentOffset.x / arrayCount - ((FUll_VIEW_WIDTH - _topBarWidth) / arrayCount * ((scrollView.contentOffset.x + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH)) + (yourCount * _topBarWidth - _width)/2.0);
         if (arrayCount > 5) {
             additionCount = (arrayCount - 5.0) / 5.0;
             yourCount = 1.0 / 5.0;
@@ -313,6 +311,5 @@
     [self addSubview:self.topTab];
 
 }
-
 
 @end

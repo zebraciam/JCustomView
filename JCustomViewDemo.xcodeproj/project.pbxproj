@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1597C4F51E8366A0004A6969 /* JScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1597C4F41E8366A0004A6969 /* JScrollView.m */; };
 		15B939581DC6FFCD0067467E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B939571DC6FFCD0067467E /* main.m */; };
 		15B9395B1DC6FFCD0067467E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B9395A1DC6FFCD0067467E /* AppDelegate.m */; };
 		15B9395E1DC6FFCD0067467E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B9395D1DC6FFCD0067467E /* ViewController.m */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1597C4F31E8366A0004A6969 /* JScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JScrollView.h; sourceTree = "<group>"; };
+		1597C4F41E8366A0004A6969 /* JScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JScrollView.m; sourceTree = "<group>"; };
 		15B939531DC6FFCD0067467E /* JCustomViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JCustomViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B939571DC6FFCD0067467E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		15B939591DC6FFCD0067467E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 		15B939BD1DC702630067467E /* JPagerViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1597C4F31E8366A0004A6969 /* JScrollView.h */,
+				1597C4F41E8366A0004A6969 /* JScrollView.m */,
 				15B939BE1DC702630067467E /* JPagerBaseViewController.h */,
 				15B939BF1DC702630067467E /* JPagerBaseViewController.m */,
 				15B939C01DC702630067467E /* JPagerMacro.h */,
@@ -492,6 +497,7 @@
 				15B939E21DC702630067467E /* JPageControl.m in Sources */,
 				15B939DF1DC702630067467E /* JCustomPickerView.m in Sources */,
 				15B939E01DC702630067467E /* JPickView.m in Sources */,
+				1597C4F51E8366A0004A6969 /* JScrollView.m in Sources */,
 				15B9395E1DC6FFCD0067467E /* ViewController.m in Sources */,
 				15B9395B1DC6FFCD0067467E /* AppDelegate.m in Sources */,
 				15B939581DC6FFCD0067467E /* main.m in Sources */,
