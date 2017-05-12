@@ -74,19 +74,19 @@
     cancel.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0];
     [cancel addTarget:pickView action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:cancel];
-
+    
     [pickView addSubview:header];
-    UIPickerView *pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 270)];
+    UIPickerView *pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 260)];
     
     pick.delegate = pickView;
     pick.backgroundColor = [UIColor whiteColor];
     [pickView addSubview:pick];
     
     
-    float height = 300;
+    float height = pick.j_height + 40;
     pickView.frame = CGRectMake(0, SCREENSIZE.height - height, SCREENSIZE.width, height);
     [pickView showPickView];
-
+    
 }
 
 + (void)j_createPickerWithTextFieldInputView:(id)textView
@@ -129,15 +129,14 @@
     
     [pickView addSubview:header];
     
-    UIPickerView *pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 250)];
+    UIPickerView *pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 230)];
     
     pick.delegate = pickView;
     pick.backgroundColor = [UIColor whiteColor];
     [pickView addSubview:pick];
     
     
-    float height = 270;
-    
+    float height = pick.j_height + 40;
     pickView.frame = CGRectMake(0, SCREENSIZE.height - height, SCREENSIZE.width, height);
     
     if([textView isKindOfClass:[UITextField class]]){
@@ -185,8 +184,9 @@
     
     [pickView addSubview:header];
     
-    // 1.日期Picker
-    UIDatePicker *datePickr = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 270)];
+    // 1.日期Picker    UIPickerView *pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, pickView.j_height - 40)];
+    
+    UIDatePicker *datePickr = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 260)];
     datePickr.backgroundColor = [UIColor whiteColor];
     if (defaultDate) {
         [datePickr setDate:defaultDate animated:YES];
@@ -216,8 +216,9 @@
     
     [pickView addSubview:datePickr];
     
-    float height = 300;
+    float height = datePickr.j_height + 40;
     pickView.frame = CGRectMake(0, SCREENSIZE.height - height, SCREENSIZE.width, height);
+    
     [pickView showPickView];
 }
 
@@ -256,13 +257,13 @@
     cancel.backgroundColor = [UIColor whiteColor];
     cancel.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15.0];
     [cancel addTarget:pickView action:@selector(cancel1:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [header addSubview:cancel];
     
     [pickView addSubview:header];
     
     // 1.日期Picker
-    UIDatePicker *datePickr = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 250)];
+    UIDatePicker *datePickr = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 230)];
     datePickr.backgroundColor = [UIColor whiteColor];
     if (defaultDate) {
         [datePickr setDate:defaultDate animated:YES];
@@ -292,8 +293,7 @@
     
     [pickView addSubview:datePickr];
     
-    float height = 270;
-    
+    float height = datePickr.j_height + 40;
     pickView.frame = CGRectMake(0, SCREENSIZE.height - height, SCREENSIZE.width, height);
     
     if([textView isKindOfClass:[UITextField class]]){
@@ -343,13 +343,13 @@
             }
             
         }
-
-       
-
+        
+        
+        
     }
     JBlock(_block, self.selectedStr);
     [self hide];
-   
+    
     
 }
 - (void)cancel1:(UIButton *)btn
@@ -389,7 +389,7 @@
 
 // pickerView 每列个数
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-
+    
     
     return [self.proTitleList count];
 }
@@ -402,7 +402,7 @@
 // 返回选中的行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-
+    
     self.selectedStr = [self.proTitleList objectAtIndex:row];
     
 }
@@ -411,7 +411,7 @@
 -(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return [self.proTitleList objectAtIndex:row];
-
+    
 }
 - (UIColor *)getColor:(NSString*)hexColor
 

@@ -29,7 +29,7 @@
 		15B939E41DC702630067467E /* JTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B939D41DC702630067467E /* JTabBarButton.m */; };
 		15B939E51DC702630067467E /* JTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B939D61DC702630067467E /* JTabBarController.m */; };
 		15B939E61DC702630067467E /* JTopClassification.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B939D91DC702630067467E /* JTopClassification.m */; };
-		C768E04AF3CC5A37C319279C /* Pods_JCustomViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71C1E5CC99F03D53D68AA211 /* Pods_JCustomViewDemo.framework */; };
+		AA7E58E7E0CE6678EB0030E3 /* libPods-JCustomViewDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9ED24DA08B4521A53F17F9 /* libPods-JCustomViewDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +96,7 @@
 		15B939D91DC702630067467E /* JTopClassification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JTopClassification.m; sourceTree = "<group>"; };
 		15B939DA1DC702630067467E /* JView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JView.h; sourceTree = "<group>"; };
 		7031559C6086EE4AF0750A85 /* Pods-JCustomViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JCustomViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JCustomViewDemo/Pods-JCustomViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		71C1E5CC99F03D53D68AA211 /* Pods_JCustomViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JCustomViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B9ED24DA08B4521A53F17F9 /* libPods-JCustomViewDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JCustomViewDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0130371A6972DBA05D43AD0 /* Pods-JCustomViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JCustomViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JCustomViewDemo/Pods-JCustomViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C768E04AF3CC5A37C319279C /* Pods_JCustomViewDemo.framework in Frameworks */,
+				AA7E58E7E0CE6678EB0030E3 /* libPods-JCustomViewDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +295,7 @@
 		D76D1F28ED39DAAC5F3FC90C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				71C1E5CC99F03D53D68AA211 /* Pods_JCustomViewDemo.framework */,
+				8B9ED24DA08B4521A53F17F9 /* libPods-JCustomViewDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

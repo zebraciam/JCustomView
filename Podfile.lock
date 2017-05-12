@@ -1,17 +1,17 @@
 PODS:
-  - JKit (2.0.4.1)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
+  - JKit (2.1.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
   - JKit
   - SDWebImage
 
 SPEC CHECKSUMS:
-  JKit: d5e1aba5a91cb4e49c2f122fc7c340dee740d635
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  JKit: fe1f5c0713a06940289bf508f6ab3ccd08f2c41d
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 69b6f2552bf8e04939a8987f7c0087aee6c3b726
+PODFILE CHECKSUM: fecfc5d7e44d62d20b3b081da2c24a6b09494b5f
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.2.0

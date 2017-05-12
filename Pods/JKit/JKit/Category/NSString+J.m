@@ -7,7 +7,6 @@
 //
 
 #import "NSString+J.h"
-#import "JKit.h"
 #import <CommonCrypto/CommonDigest.h>
 //引入IOS自带密码库
 #import <CommonCrypto/CommonCryptor.h>
@@ -17,6 +16,25 @@
 #define myNumbers          @"0123456789\n"
 
 @implementation NSString (J)
+
+#pragma mark 将NSString转为NSDate
+
+- (NSDate *)j_dateWithDateFormat:(JDateFormat)format
+{
+    NSDateFormatter *JDateFormatter = [[NSDateFormatter alloc] init];
+    
+    [JDateFormatter setDateFormat:[NSDate formatString:format]];
+    NSDate *date = [JDateFormatter dateFromString:self];
+    
+    return date;
+}
+
++ (NSString *)j_date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    return dateString;
+}
 
 - (NSString *)j_toHex{
     NSString *nLetterValue;
@@ -164,7 +182,7 @@
  运营商手机号段划分
  
  中国移动：134（0-8）、135、136、137、138、139、147、150、151、152、154、157、158、159、178、182、183、184、187、188
- 中国联通：130、131、132、145、155、156、176、185、186
+ 中国联通：130、131、132、145、155、156、173、176、185、186
  中国电信：133、1349、153、177、180、181、189
  网络运营商：170
  *
@@ -172,7 +190,7 @@
  */
 - (BOOL)j_validMobile
 {
-    return [self validWithRegex:@"^(0|86|17951)?(13[0-9]|15[0-9]|17[0678]|18[0-9]|14[57])[0-9]{8}$"];
+    return [self validWithRegex:@"^(0|86|17951)?(13[0-9]|15[0-9]|17[03678]|18[0-9]|14[57])[0-9]{8}$"];
 }
 
 #pragma mark 判断身份证号
