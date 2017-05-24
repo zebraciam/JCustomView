@@ -59,7 +59,8 @@
                             andTopTabBgColor:(UIColor *)topTabColor
                   andDeallocVCsIfUnnecessary:(BOOL)isUnnecessary
                              andDefaultIndex:(NSInteger)index
-                           andSelectCallBack:(JPagerViewControllerBlock)block{
+                                andTitleFont:(UIFont *)titleFont
+                           andSelectCallBack:(JPagerViewControllerBlock)block {
     
     JPagerViewController *ninaPagerView = [[JPagerViewController alloc] initWithFrame:frame];
     ninaPagerView.superClass = superClass;
@@ -74,7 +75,7 @@
     ninaPagerView.block = block;
     [superClass.view addSubview:ninaPagerView];
     
-    [ninaPagerView createPagerViewWithFrame:frame];
+    [ninaPagerView createPagerViewWithFrame:frame andTitleFont:titleFont];
     
 }
 
@@ -88,7 +89,9 @@
              andTopTabBgColor:(UIColor *)topTabColor
    andDeallocVCsIfUnnecessary:(BOOL)isUnnecessary
               andDefaultIndex:(NSInteger)index
-            andSelectCallBack:(JPagerViewControllerBlock)block{
+                 andTitleFont:(UIFont *)titleFont
+            andSelectCallBack:(JPagerViewControllerBlock)block {
+    
     self = [super initWithFrame:frame];
     if (self) {
         self.superClass = superClass;
@@ -102,7 +105,7 @@
         self.defaultIndex = index;
         self.block = block;
         
-        [self createPagerViewWithFrame:frame];
+        [self createPagerViewWithFrame:frame andTitleFont:titleFont];
     }
     return self;
 }
@@ -119,7 +122,7 @@
 }
 
 #pragma mark - CreateView
-- (void)createPagerViewWithFrame:(CGRect)frame{
+- (void)createPagerViewWithFrame:(CGRect)frame andTitleFont:(UIFont *)titleFont{
     viewNumArray = [NSMutableArray array];
     vcsArray = [NSMutableArray array];
     vcsTagArray = [NSMutableArray array];
@@ -127,7 +130,7 @@
         _topBarHeight = PageBtn;
     }
     if (_myArray.count > self.defaultIndex && _classArray.count > self.defaultIndex) {
-        _pagerView = [[JPagerBaseViewController alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) WithSelectColor:_selectColor WithUnselectorColor:_unselectColor WithUnderLineColor:_underlineColor WithtopTabColor:_topTabColor];
+        _pagerView = [[JPagerBaseViewController alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) WithSelectColor:_selectColor WithUnselectorColor:_unselectColor WithUnderLineColor:_underlineColor WithtopTabColor:_topTabColor andTitleFont:titleFont];
         _pagerView.titleArray = _myArray;
         [_pagerView addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
         [self addSubview:_pagerView];
@@ -160,7 +163,7 @@
     }
 }
 
-- (void)j_setPagerViewControllerWithIndex:(NSInteger)index{
+- (void)j_setPagerViewControllerWithIndex:(NSInteger)index {
     [_pagerView.scrollView setContentOffset:CGPointMake(FUll_VIEW_WIDTH * index, 0) animated:YES];
     _pagerView.currentPage = (FUll_VIEW_WIDTH * index + FUll_VIEW_WIDTH / 2) / FUll_VIEW_WIDTH;
 }
@@ -274,12 +277,6 @@
     }
 }
 
-- (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y {
-    
-    [_pagerView setPagerViewLineViewWithWidth:width andY:y];
-    
-}
-
 - (void)j_1setPagerViewTopBarWithWidth:(CGFloat)width andHeight:(CGFloat)height andAlpha:(CGFloat)alpha {
     
     _topBarHeight = height;
@@ -291,6 +288,12 @@
         vc.view.frame = CGRectMake(FUll_VIEW_WIDTH * self.defaultIndex, 0, FUll_VIEW_WIDTH, FUll_CONTENT_HEIGHT - _topBarHeight);
         
     }
+    
+}
+
+- (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andHeight:(CGFloat)height andY:(CGFloat)y {
+    
+    [_pagerView setPagerViewLineViewWithWidth:width andHeight:height andY:y];
     
 }
 

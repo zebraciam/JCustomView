@@ -27,13 +27,14 @@
     CGFloat _topBarWidth;
     CGFloat _topBarHeight;
     CGFloat _topBarAlpha;
+    UIFont *_titleFont;
 
 }
 
-- (instancetype)initWithFrame:(CGRect)frame WithSelectColor:(UIColor *)selectColor WithUnselectorColor:(UIColor *)unselectColor WithUnderLineColor:(UIColor *)underlineColor WithtopTabColor:(UIColor *)topTabColor
-{
+- (instancetype)initWithFrame:(CGRect)frame WithSelectColor:(UIColor *)selectColor WithUnselectorColor:(UIColor *)unselectColor WithUnderLineColor:(UIColor *)underlineColor WithtopTabColor:(UIColor *)topTabColor andTitleFont:(UIFont *)titleFont {
     self = [super initWithFrame:frame];
     if (self) {
+        _titleFont = titleFont ? titleFont : [UIFont systemFontOfSize:14];
         if ([selectColor isKindOfClass:[UIColor class]]) {
             selectBtn = selectColor;
         }else {
@@ -116,7 +117,7 @@
         for (NSInteger i = 0; i < titlesArray.count; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = i;
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
+            button.titleLabel.font = _titleFont;
             if ([titlesArray[i] isKindOfClass:[NSString class]]) {
                 [button setTitle:titlesArray[i] forState:UIControlStateNormal];
             }else {
@@ -274,8 +275,7 @@
     _topTabBottomLine.frame = CGRectMake(-1000, _topBarHeight - 1, (1 + additionCount) * FUll_VIEW_WIDTH + 2000, 1);
 }
 
-
-- (void)setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y {
+- (void)setPagerViewLineViewWithWidth:(CGFloat)width andHeight:(CGFloat)height andY:(CGFloat)y {
     
     _width = width;
     _y = y;
@@ -286,7 +286,7 @@
         additionCount = (arrayCount - 5.0) / 5.0;
         yourCount = 1.0 / 5.0;
     }
-    _lineBottom.frame = CGRectMake((yourCount * _topBarWidth - width) / 2, y, width, 1);
+    _lineBottom.frame = CGRectMake((yourCount * _topBarWidth - width) / 2, y, width, height ? height : 1);
     
 }
 

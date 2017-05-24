@@ -32,7 +32,7 @@ typedef void(^JPagerViewControllerBlock)(NSInteger index);
  */
 
 + (void)j_createPagerViewControllerWithFrame:(CGRect)frame
-                                  andSuperClass:(UIViewController *)superClass
+                               andSuperClass:(UIViewController *)superClass
                                    andTitles:(NSArray *)titles
                                  andchildVCs:(NSArray *)childVCs
                               andSelectColor:(UIColor *)selectColor
@@ -41,6 +41,7 @@ typedef void(^JPagerViewControllerBlock)(NSInteger index);
                             andTopTabBgColor:(UIColor *)topTabColor
                   andDeallocVCsIfUnnecessary:(BOOL)isUnnecessary
                              andDefaultIndex:(NSInteger)index
+                                andTitleFont:(UIFont *)titleFont
                            andSelectCallBack:(JPagerViewControllerBlock)block;
 
 /**
@@ -65,6 +66,7 @@ typedef void(^JPagerViewControllerBlock)(NSInteger index);
              andTopTabBgColor:(UIColor *)topTabColor
    andDeallocVCsIfUnnecessary:(BOOL)isUnnecessary
               andDefaultIndex:(NSInteger)index
+                 andTitleFont:(UIFont *)titleFont
             andSelectCallBack:(JPagerViewControllerBlock)block;
 
 - (void)j_setPagerViewControllerWithIndex:(NSInteger)index;
@@ -80,10 +82,11 @@ typedef void(^JPagerViewControllerBlock)(NSInteger index);
 /**
  设置下划线的宽和y值
 
- @param width 下划线宽 默认item.width
- @param y y值 默认 item.height - 1
+ @param width  下划线宽 默认item.width
+ @param height 下划线高 默认1
+ @param y y值  默认 item.height - 1
  */
-- (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y;
+- (void)j_2setPagerViewLineViewWithWidth:(CGFloat)width andHeight:(CGFloat)height andY:(CGFloat)y;
 
 
 

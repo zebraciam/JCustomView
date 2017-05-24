@@ -26,9 +26,9 @@
  @param width 下划线宽 默认item.width
  @param y y值 默认 item.height - 1
  */
-- (void)setPagerViewLineViewWithWidth:(CGFloat)width andY:(CGFloat)y;
+- (void)setPagerViewLineViewWithWidth:(CGFloat)width andHeight:(CGFloat)height andY:(CGFloat)y;
 
-- (instancetype)initWithFrame:(CGRect)frame WithSelectColor:(UIColor *)selectColor WithUnselectorColor:(UIColor *)unselectColor WithUnderLineColor:(UIColor *)underlineColor WithtopTabColor:(UIColor *)topTabColor;
+- (instancetype)initWithFrame:(CGRect)frame WithSelectColor:(UIColor *)selectColor WithUnselectorColor:(UIColor *)unselectColor WithUnderLineColor:(UIColor *)underlineColor WithtopTabColor:(UIColor *)topTabColor andTitleFont:(UIFont *)titleFont;
 
 - (void)setPagerViewTopBarWithWidth:(CGFloat)width andHeight:(CGFloat)height andAlpha:(CGFloat)alpha;
 
