@@ -21,6 +21,7 @@
     
     //下划线width 和 y
     CGFloat _width;
+    CGFloat _height;
     CGFloat _y;
     
     //topBar
@@ -213,7 +214,7 @@
                 _width = yourCount * _topBarWidth;
                 _y = _topBarHeight - 2;
             }
-            _lineBottom.frame = CGRectMake(scrollView.contentOffset.x / 5 - ((FUll_VIEW_WIDTH - _topBarWidth) / 5) * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width) / 2, _y, _width, 1);
+            _lineBottom.frame = CGRectMake(scrollView.contentOffset.x / 5 - ((FUll_VIEW_WIDTH - _topBarWidth) / 5) * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width) / 2, _y, _width, _height ? _height : 1);
         }else {
             if (!_width || !_y) {
                 _width = yourCount * _topBarWidth;
@@ -224,7 +225,7 @@
 //             * scrollView.contentOffset.x / FUll_VIEW_WIDTH ：页码
 //            (yourCount * _topBarWidth - _width)/2 ：下划线偏移的Point
 //            起始点 - 设置topBar宽度时偏移量 * 页码
-            _lineBottom.frame = CGRectMake(scrollView.contentOffset.x / arrayCount - (FUll_VIEW_WIDTH - _topBarWidth) / arrayCount * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width)/2, _y, _width, 1);
+            _lineBottom.frame = CGRectMake(scrollView.contentOffset.x / arrayCount - (FUll_VIEW_WIDTH - _topBarWidth) / arrayCount * scrollView.contentOffset.x / FUll_VIEW_WIDTH + (yourCount * _topBarWidth - _width)/2, _y, _width, _height ? _height : 1);
         }
         for (NSInteger i = 0;  i < btnArray.count; i++) {
             if (unselectBtn) {
@@ -279,6 +280,7 @@
     
     _width = width;
     _y = y;
+    _height = height;
     
     CGFloat yourCount = 1.0 / arrayCount;
     CGFloat additionCount = 0;
@@ -286,7 +288,7 @@
         additionCount = (arrayCount - 5.0) / 5.0;
         yourCount = 1.0 / 5.0;
     }
-    _lineBottom.frame = CGRectMake((yourCount * _topBarWidth - width) / 2, y, width, height ? height : 1);
+    _lineBottom.frame = CGRectMake((yourCount * _topBarWidth - width) / 2, _y, _width, _height ? _height : 1);
     
 }
 
