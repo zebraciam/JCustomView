@@ -365,7 +365,7 @@
 }
 
 -(void)setPlaceImage:(UIImage *)placeImage {
-    if (!_isNetwork) return;
+//    if (!_isNetwork) return;
     
     _placeImage = placeImage;
     if (_MaxImageCount < 2 && _centerImageView) {
