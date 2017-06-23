@@ -74,4 +74,11 @@ typedef NS_ENUM(NSUInteger, PageControlStyle) {
 
 @property (nonatomic,strong) UIFont *font;
 
+/**
+ 设置图片 UIViewContentMode
+ 
+ @param contentMode <#contentMode description#>
+ */
+- (void)setImageContentMode:(UIViewContentMode)contentMode;
+
 @end

@@ -53,6 +53,12 @@
     
     [self setUpTimer];
     
+//    _leftImageView.contentMode = UIViewContentModeScaleAspectFill;
+// 
+//    _centerImageView.contentMode = UIViewContentModeScaleAspectFill;
+//
+//    _rightImageView.contentMode = UIViewContentModeScaleAspectFill;
+
     [self changeImageLeft:_MaxImageCount-1 center:0 right:1];
 }
 
@@ -411,6 +417,21 @@
     if (_timer == nil) return;
     [_timer invalidate];
     _timer = nil;
+}
+
+- (void)setImageContentMode:(UIViewContentMode)contentMode {
+    
+    _leftImageView.contentMode = contentMode;
+    
+    _centerImageView.contentMode = contentMode;
+    
+    _rightImageView.contentMode = contentMode;
+    
+    _leftImageView.clipsToBounds = YES;
+    
+    _centerImageView.clipsToBounds = YES;
+    
+    _rightImageView.clipsToBounds = YES;
 }
 
 -(void)dealloc {
