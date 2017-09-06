@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) UIScrollView *pagingScrollView;
 
-
 /**
  @[@"image1", @"image2"]
  */
@@ -104,6 +103,16 @@
     self.enterButton.frame = [self frameOfEnterButton];
     self.enterButton.alpha = 0;
     [self.view addSubview:self.enterButton];
+    
+    self.skipButton = [UIButton new];
+    [self.skipButton setTitle:@"跳过" forState:UIControlStateNormal];
+    self.skipButton.layer.cornerRadius = 5;
+    self.skipButton.layer.borderWidth = 0.5;
+    self.skipButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.skipButton.frame = CGRectMake(self.view.frame.size.width - 60, 10, 50, 25);
+    self.skipButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.skipButton addTarget:self action:@selector(enter:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.skipButton];
     
     [self reloadPages];
 }

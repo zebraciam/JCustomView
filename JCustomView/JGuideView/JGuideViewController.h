@@ -21,6 +21,11 @@ typedef void (^DidSelectedEnter)();
 
 
 /**
+ *  跳过按钮
+ */
+@property (nonatomic, strong) UIButton *skipButton;
+
+/**
  *  初始化
  *
  *  @param coverNames 背景图片
