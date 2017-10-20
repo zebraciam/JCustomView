@@ -188,9 +188,7 @@
     
     UIDatePicker *datePickr = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 260)];
     datePickr.backgroundColor = [UIColor whiteColor];
-    if (defaultDate) {
-        [datePickr setDate:defaultDate animated:YES];
-    }
+    
     datePickr.maximumDate = maxDate;
     datePickr.minimumDate = minDate;
     // 1.1选择datePickr的显示风格
@@ -209,10 +207,16 @@
     // 1.4监听datePickr的数值变化
     [datePickr addTarget:pickView action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     
-    NSDate *date = [NSDate date];
-    
-    // 2.3 将转换后的日期设置给日期选择控件
-    [datePickr setDate:date];
+    if (defaultDate) {
+        [datePickr setDate:defaultDate animated:YES];
+        
+    } else {
+        
+        NSDate *date = [NSDate date];
+        
+        // 2.3 将转换后的日期设置给日期选择控件
+        [datePickr setDate:date];
+    }
     
     [pickView addSubview:datePickr];
     
@@ -265,9 +269,7 @@
     // 1.日期Picker
     UIDatePicker *datePickr = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, SCREENSIZE.width, 230)];
     datePickr.backgroundColor = [UIColor whiteColor];
-    if (defaultDate) {
-        [datePickr setDate:defaultDate animated:YES];
-    }
+
     datePickr.maximumDate = maxDate;
     datePickr.minimumDate = minDate;
     // 1.1选择datePickr的显示风格
@@ -286,10 +288,16 @@
     // 1.4监听datePickr的数值变化
     [datePickr addTarget:pickView action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     
-    NSDate *date = [NSDate date];
-    
-    // 2.3 将转换后的日期设置给日期选择控件
-    [datePickr setDate:date];
+    if (defaultDate) {
+        [datePickr setDate:defaultDate animated:YES];
+        
+    } else {
+        
+        NSDate *date = [NSDate date];
+        
+        // 2.3 将转换后的日期设置给日期选择控件
+        [datePickr setDate:date];
+    }
     
     [pickView addSubview:datePickr];
     
