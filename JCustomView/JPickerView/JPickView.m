@@ -9,6 +9,13 @@
 #import "JPickView.h"
 
 #define SCREENSIZE UIScreen.mainScreen.bounds.size
+
+@interface JPickView()
+
+@property (nonatomic, strong) NSDate *defaultDate;
+
+@end
+
 @implementation JPickView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -209,13 +216,14 @@
     
     if (defaultDate) {
         [datePickr setDate:defaultDate animated:YES];
-        
+        pickView.defaultDate = defaultDate;
     } else {
         
         NSDate *date = [NSDate date];
         
         // 2.3 将转换后的日期设置给日期选择控件
         [datePickr setDate:date];
+        pickView.defaultDate = date;
     }
     
     [pickView addSubview:datePickr];
@@ -290,13 +298,14 @@
     
     if (defaultDate) {
         [datePickr setDate:defaultDate animated:YES];
-        
+        pickView.defaultDate = defaultDate;
     } else {
         
         NSDate *date = [NSDate date];
         
         // 2.3 将转换后的日期设置给日期选择控件
         [datePickr setDate:date];
+        pickView.defaultDate = date;
     }
     
     [pickView addSubview:datePickr];
@@ -378,7 +387,7 @@
             }else{
                 [formatter setDateFormat:@"yyyy-MM-dd"];
             }
-            self.selectedStr = [formatter stringFromDate:[NSDate date]];
+            self.selectedStr = [formatter stringFromDate:self.defaultDate];
         } else {
             if([self.proTitleList count] > 0) {
                 self.selectedStr = self.proTitleList[0];
