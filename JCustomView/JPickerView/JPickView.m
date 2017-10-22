@@ -353,7 +353,7 @@
             }else{
                 [formatter setDateFormat:@"yyyy-MM-dd"];
             }
-            self.selectedStr = [formatter stringFromDate:[NSDate date]];
+            self.selectedStr = [formatter stringFromDate:self.defaultDate];
         } else {
             if([self.proTitleList count] > 0) {
                 self.selectedStr = self.proTitleList[0];

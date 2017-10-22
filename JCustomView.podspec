@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "JCustomView"
-s.version      = "1.1.5"
+s.version      = "1.1.6"
 s.summary      = "Fast iOS Develope App View"
 s.description  = <<-DESC
 JCustomView 开发时用的View类
