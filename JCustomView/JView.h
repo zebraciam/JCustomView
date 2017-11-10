@@ -15,7 +15,7 @@
 #import "JPagerViewController.h"
 #import "JGuideViewController.h"
 #import "JCustomPickerView.h"
-#import "JPlaceholderView.h"
+#import <JKit/JPlaceholderView.h>
 #import "JTabBarController.h"
 #import "JPicScrollerLabel.h"
 
